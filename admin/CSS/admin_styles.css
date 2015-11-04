@@ -1,0 +1,10 @@
+body {
+	background-color: #F1F1F1;
+}
+
+.page {
+	background-color: #fff;
+	border: 1px solid #CCC;
+	padding: 25px;
+	margin: 10px 0px;
+}
