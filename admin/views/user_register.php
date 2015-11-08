@@ -6,7 +6,7 @@
 			<h2>Add New User</h2>
 
 			<form action="" method="POST">
-
+				
 				<?php if($objData->error) echo '<div class="alert alert-danger"><strong>Error Input</strong><br>' . implode('<br>', $objData->msg) . '</div>'; ?>
 
 
