@@ -1,5 +1,16 @@
+@import url(//fonts.googleapis.com/css?family=Open+Sans:400,700);
+
 body {
 	background-color: #F1F1F1;
+	font-family: 'Open Sans', 'sans-serif';
+}
+
+a:hover {
+	text-decoration: none;
+}
+
+a.text-danger:hover {
+	color: red;
 }
 
 .page {
@@ -7,4 +18,23 @@ body {
 	border: 1px solid #CCC;
 	padding: 25px;
 	margin: 10px 0px;
+}
+
+.table thead,
+.table tfoot {
+	border: 1px solid #DDDDDD;
+}
+.table tfoot {
+	border-top: 2px solid #DDDDDD;
+}
+
+.table tbody {
+	border-left: 1px solid #DDDDDD;
+	border-right: 1px solid #DDDDDD;
+}
+
+.table-actions {
+	font-size: 90%;
+	margin: 2px 0px;
+	visibility: hidden;
 }

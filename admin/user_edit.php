@@ -4,8 +4,7 @@
     require_once('../Models/User.php');
 
     // Grab the user ID
-    //$intUsrID = (int)filter_input(INPUT_GET, 'usrID');
-    $intUsrID = 5;
+    $intUsrID = (int)filter_input(INPUT_GET, 'usrID');
 
     // Grab a user object with this data
     $objUser = new User($intUsrID);
@@ -98,9 +97,5 @@
 
     }
 
-    echo '<pre>';
-    var_dump($objData);
-    echo '</pre>';
-
-
+    // Load the view
     include('views/user_edit.php');
