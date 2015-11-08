@@ -5,10 +5,12 @@ require_once('Database.php');
     class User extends Database {
         private $_id;
         private $_email;
+        private $_password;
         private $_fname;
         private $_lname;
         private $_website;
         private $_admin;
+        private $_created;
 
         public function __construct($usrID = null) {
             parent::__construct();
@@ -82,10 +84,7 @@ require_once('Database.php');
         public function getFirstName() { return (!empty($this->_fname)) ? $this->_fname : ''; }
         public function getLastName() { return (!empty($this->_lname)) ? $this->_lname : ''; }
         public function getWebsite() { return (!empty($this->_website)) ? $this->_website : ''; }
-
-        public function isAdmin() {
-            return $this->_admin;
-        }
+        public function isAdmin() { return $this->_admin; }
 
         public function save() {
             if(is_null($this->_id)) {
@@ -105,8 +104,17 @@ require_once('Database.php');
 
         private function _fetchUser($intID) {
             // check to see if its a integer otherwise throw an exception
-
-            // Grab the data and set the instance variables.
+            if(!is_int($intID)) throw new \Exception('The user ID needs to be of integer data type.');
+            // Grab the data
+            $objUser = $this->get('users', array('id', '=', $intID))->first_result();
+            // Set the instance variables
+            $this->_id          = $objUser->id;
+            $this->_email       = $objUser->email;
+            $this->_fname       = $objUser->firstname;
+            $this->_lname       = $objUser->lastname;
+            $this->_website     = $objUser->website;
+            $this->_admin       = (bool)$objUser->admin;
+            $this->_created     = new \DateTime($objUser->created);
         }
 
         private function _createUser() {
@@ -121,7 +129,18 @@ require_once('Database.php');
         }
 
         private function _updateUser() {
+            $arrUpdate = array(
+                'email'     => $this->_email,
+                'firstname' => $this->_fname,
+                'lastname'  => $this->_lname,
+                'website'   => $this->_website,
+                'admin'     => $this->_admin
+            );
+            if(!empty($this->_password)) {
+                $arrUpdate['password'] = password_hash($this->_password, PASSWORD_DEFAULT, array('cost' => 12));
+            }
 
+            $this->update('users', $this->_id, $arrUpdate);
         }
 
     }

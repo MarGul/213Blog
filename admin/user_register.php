@@ -11,11 +11,11 @@
 	$objData->error 	= false;
 	$objData->errors    = array();
 	$objData->input 	= array(
-			'usrEmail' 		=> '',
-			'usrFirstName' 	=> '',
-			'usrLastName' 	=> '',
-			'usrWebsite'	=> '',
-		);
+		'usrEmail' 		=> '',
+		'usrFirstName' 	=> '',
+		'usrLastName' 	=> '',
+		'usrWebsite'	=> '',
+	);
 	$objData->msg    	= array();
 	$objData->success   = null;
 
@@ -24,14 +24,14 @@
 
 		//-- Set the input --//
 		$objData->input = array(
-				'usrEmail' 			=> filter_input(INPUT_POST, 'usrEmail'),
-				'usrFirstName' 		=> filter_input(INPUT_POST, 'usrFirstName'),
-				'usrLastName' 		=> filter_input(INPUT_POST, 'usrLastName'),
-				'usrWebsite' 		=> filter_input(INPUT_POST, 'usrWebsite'),
-				'usrPassword' 		=> filter_input(INPUT_POST, 'usrPassword'),
-				'usrPasswordRepeat' => filter_input(INPUT_POST, 'usrPasswordRepeat'),
-				'usrRole' 			=> filter_input(INPUT_POST, 'usrRole')
-			);
+			'usrEmail' 			=> filter_input(INPUT_POST, 'usrEmail'),
+			'usrFirstName' 		=> filter_input(INPUT_POST, 'usrFirstName'),
+			'usrLastName' 		=> filter_input(INPUT_POST, 'usrLastName'),
+			'usrWebsite' 		=> filter_input(INPUT_POST, 'usrWebsite'),
+			'usrPassword' 		=> filter_input(INPUT_POST, 'usrPassword'),
+			'usrPasswordRepeat' => filter_input(INPUT_POST, 'usrPasswordRepeat'),
+			'usrRole' 			=> filter_input(INPUT_POST, 'usrRole')
+		);
 
 		//-- Validate input --//
 		
@@ -88,9 +88,6 @@
 			}
 		}
 	}
-
-
-
 
 	// Load the view
 	include('views/user_register.php');
