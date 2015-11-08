@@ -7,7 +7,8 @@
 
 			<form action="" method="POST">
 				
-				<?php if($objData->error) echo '<div class="alert alert-danger"><strong>Error Input</strong><br>' . implode('<br>', $objData->msg) . '</div>'; ?>
+				<?php if($objData->error) echo '<div class="alert alert-danger" role="alert"><strong>Error Input</strong><br>' . implode('<br>', $objData->msg) . '</div>'; ?>
+				<?php if($objData->success) echo '<div class="alert alert-success" role="alert"><strong>Success</strong><br>' . implode('<br>', $objData->msg) . '</div>'; ?>
 
 
 				<div class="form-group <?php echo (in_array('usrEmail', $objData->errors)) ? 'has-error' : ''; ?>">
@@ -38,6 +39,14 @@
 				<div class="form-group <?php echo (in_array('usrPasswordRepeat', $objData->errors)) ? 'has-error' : ''; ?>">
 					<label for="usrPasswordRepeat">Repeat password:</label>
 					<input type="password" name="usrPasswordRepeat" id="usrPasswordRepeat" class="form-control">
+				</div>
+
+				<div class="form-group <?php echo (in_array('usrRole', $objData->errors)) ? 'has-error' : ''; ?>">
+					<label for="usrRole">User Role:</label>
+					<select name="usrRole" id="usrRole" class="form-control">
+						<option value="0" <?php echo ($objData->error && $objData->input['usrRole'] == 0) ? 'selected="selected"' : ''; ?>>Author</option>
+						<option value="1" <?php echo ($objData->error && $objData->input['usrRole'] == 1) ? 'selected="selected"' : ''; ?>>Administrator</option>
+					</select>
 				</div>
 
 				<input type="submit" class="btn btn-primary" value="Add New User">

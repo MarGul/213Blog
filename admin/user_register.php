@@ -1,7 +1,10 @@
 <?php  
+	namespace Blog\Admin\Controllers;
+	use Blog\Models\User;
+	require_once('../Models/User.php');
 
 	// Create our return object
-	$objData = new stdClass;
+	$objData = new \stdClass;
 	// Page title
 	$objData->pageTitle = 'Add New User';
 	// Set up the default data for no warnings (this is when the user hasn't submitted the form).
@@ -27,6 +30,7 @@
 				'usrWebsite' 		=> filter_input(INPUT_POST, 'usrWebsite'),
 				'usrPassword' 		=> filter_input(INPUT_POST, 'usrPassword'),
 				'usrPasswordRepeat' => filter_input(INPUT_POST, 'usrPasswordRepeat'),
+				'usrRole' 			=> filter_input(INPUT_POST, 'usrRole')
 			);
 
 		//-- Validate input --//
@@ -34,7 +38,7 @@
 		// Loop through the data and see so that all the required fields have input.
 		foreach ($objData->input as $key => $input) {
 			// Non required fields
-			if(in_array($key, array('usrWebsite'))) continue;
+			if(in_array($key, array('usrWebsite', 'usrRole'))) continue;
 
 			if(empty($input)) {
 				$objData->error    = true;
@@ -59,11 +63,33 @@
 		}
 
 		// Check to see if the email already exists.
+
+		// If there is no errors then let's create the user
+		if(!$objData->error) {
+			$objUser = new User();
+			// Using method chaining to set all the object variables and then save, which in this case will mean a new user.
+			// The User model will throw errors if the input is wrong. It should be validated here but safety first.
+			try {
+				$objUser->setEmail($objData->input['usrEmail'])
+						->setFirstName($objData->input['usrFirstName'])
+						->setLastName($objData->input['usrLastName'])
+						->setWebsite($objData->input['usrWebsite'])
+						->setPassword($objData->input['usrPassword'])
+						->setAdmin((bool)$objData->input['usrRole'])
+						->save();
+			} catch(\Exception $e) {
+				die($e->getMessage());
+			}
+
+			// Let's see so the user was successfully inserted
+			if(!$objUser->error()) {
+				$objData->success = true;
+				$objData->msg[]   = 'The user was successfully registered.';
+			}
+		}
 	}
 
-	echo '<pre>';
-	var_dump($objData);
-	echo '</pre>';
+
 
 
 	// Load the view

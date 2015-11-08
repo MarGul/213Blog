@@ -1,4 +1,7 @@
 <?php
+namespace Blog\Models;
+
+
     class Database {
         private static $_instance = null;
         private $_pdo,
@@ -8,13 +11,10 @@
                 $_count = 0;
         
         // Create a database connection using PDO.
-        private function __construct() {
+        public function __construct() {
             try {
-                $this->_pdo = new PDO('mysql:host=' . Config::get('mysql/host') .
-                                      ';dbname=' . Config::get('mysql/db'),
-                                      Config::get('mysql/username'),
-                                      Config::get('mysql/password'));
-            } catch (PDOException $ex) {
+                $this->_pdo = new \PDO('mysql:host=localhost;dbname=213blog', 'root', '');
+            } catch (\PDOException $ex) {
                 die($ex->getMessage());
             }
         }
@@ -44,7 +44,7 @@
                 }
                 
                 if($this->_query->execute()) {
-                    $this->_results = $this->_query->fetchAll(PDO::FETCH_OBJ);
+                    $this->_results = $this->_query->fetchAll(\PDO::FETCH_OBJ);
                     $this->_count   = $this->_query->rowCount();
                 } else {
                     $this->_error = true;
