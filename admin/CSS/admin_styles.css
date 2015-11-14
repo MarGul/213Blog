@@ -13,6 +13,10 @@ a.text-danger:hover {
 	color: red;
 }
 
+.full-width {
+	width: 100%;
+}
+
 .fa {
 	font-size: 120%;
 	margin-right: 5px;
@@ -49,6 +53,11 @@ a.text-danger:hover {
 .navbar-default .navbar-brand:focus,
 .navbar-default .navbar-brand:hover{
 	color: #3c948b;
+}
+
+.login-form {
+	width: 300px;
+	margin: 100px auto;
 }
 
 .page {

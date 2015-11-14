@@ -43,7 +43,7 @@
 					</li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="#"><i class="fa fa-sign-out"></i> Log Out</a></li>
+					<li><a href="logout.php"><i class="fa fa-sign-out"></i> Log Out</a></li>
 				</ul>
 			</div><!-- /.navbar-collapse -->
 		</div><!-- /.container-fluid -->
