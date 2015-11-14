@@ -13,11 +13,50 @@ a.text-danger:hover {
 	color: red;
 }
 
+.fa {
+	font-size: 120%;
+	margin-right: 5px;
+}
+
+.navbar-default {
+	background-color: #222222;
+	border-radius: 0px;
+	border: none;
+	margin-bottom: 0px;
+}
+
+.navbar-default .navbar-toggle {
+	border-color: transparent;
+}
+
+.navbar-default .navbar-toggle:focus,
+.navbar-default .navbar-toggle:hover {
+	background-color: transparent;
+}
+
+.navbar-default .navbar-nav>li>a {
+	font-weight: bold;
+}
+
+.navbar-default .navbar-nav>.active>a,
+.navbar-default .navbar-nav>.active>a:focus,
+.navbar-default .navbar-nav>.active>a:hover {
+	background-color: #fff;
+}
+
+.navbar-default .navbar-nav>li>a:focus,
+.navbar-default .navbar-nav>li>a:hover,
+.navbar-default .navbar-brand:focus,
+.navbar-default .navbar-brand:hover{
+	color: #3c948b;
+}
+
 .page {
 	background-color: #fff;
 	border: 1px solid #CCC;
+	border-top: none;
 	padding: 25px;
-	margin: 10px 0px;
+	box-shadow: 3px 5px 10px rgba(0,0,0,.5)
 }
 
 .table thead,
@@ -37,4 +76,10 @@ a.text-danger:hover {
 	font-size: 90%;
 	margin: 2px 0px;
 	visibility: hidden;
+}
+
+footer {
+	margin-top: 10px;
+	color: #999;
+	font-size: 90%;
 }

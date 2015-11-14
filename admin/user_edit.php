@@ -12,6 +12,7 @@
     // Build up our data object
     $objData = new \stdClass;
     $objData->pageTitle  = 'Edit User';
+    $objData->activeLink = 'users';
     $objData->userExists = false;
     if($objUser->count()) {
         $objData->userExists = true;

@@ -7,8 +7,9 @@
     $objUser = new User();
 
     $objData = new \stdClass;
-    $objData->pageTitle = 'Users';
-    $objData->users     = $objUser->fetchUsers();
+    $objData->pageTitle  = 'Users';
+    $objData->activeLink = 'users';
+    $objData->users      = $objUser->fetchUsers();
 
     // Load the view
     include('views/users.php');

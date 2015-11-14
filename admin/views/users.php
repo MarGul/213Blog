@@ -7,7 +7,7 @@
 
             <h2>
                 Users
-                <a href="user_register.php" class="btn btn-info" style="margin-left: 10px;">Add New User</a>
+                <a href="user_register.php" class="btn btn-info" style="margin-left: 10px;"><i class="fa fa-user-plus"></i> Add New User</a>
             </h2>
 
 
