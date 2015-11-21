@@ -13,16 +13,24 @@
                             Add New Blog Post
                         </h2>
 
+                            <?php if($objData->error) { ?>
+                                <div class="alert alert-danger" role="alert"><strong>Invalid Input</strong><br><?php echo implode('<br>', $objData->msg); ?></div>
+                            <?php } ?>
 
+                            <?php if($objData->success) { ?>
+                                <div class="alert alert-success" role="alert"><strong>Success</strong><br><?php echo implode('<br>', $objData->msg); ?></div>
+                            <?php } ?>
 
-                            <div class="form-group">
-                                <input type="text" id="title" name="title" class="form-control" placeholder="Enter Title Here">
+                            <div class="form-group <?php echo (in_array('title', $objData->errors)) ? 'has-error' : ''; ?>">
+                                <input type="text" id="title" name="title" class="form-control" placeholder="Enter Title Here" value="<?php echo ($objData->error) ? $objData->input['title'] : ''; ?>">
                             </div>
 
                             <button type="button" class="btn btn-info"><i class="fa fa-picture-o"></i> Add Media</button>
 
-                            <div class="form-group">
-                                <textarea id="body" name="body" rows="17" class="form-control blog-body"></textarea>
+                            <div class="form-group <?php echo (in_array('body', $objData->errors)) ? 'has-error' : ''; ?>">
+                                <textarea id="body" name="body" rows="17" class="form-control blog-body">
+                                    <?php echo ($objData->error) ? $objData->input['body'] : ''; ?>
+                                </textarea>
                             </div>
 
 
@@ -35,8 +43,8 @@
                                 <div class="form-group">
                                     <label for="status"><i class="fa fa-eye"></i> Status</label>
                                     <select name="status" id="status" class="form-control">
-                                        <option value="published">Published</option>
-                                        <option value="draft">Draft</option>
+                                        <option value="published" <?php echo ($objData->error && $objData->input['status'] == 'published') ? 'selected="selected"' : ''; ?>'>Published</option>
+                                        <option value="draft" <?php echo ($objData->error && $objData->input['status'] == 'draft') ? 'selected="selected"' : ''; ?>>Draft</option>
                                     </select>
                                 </div>
                             </div>
