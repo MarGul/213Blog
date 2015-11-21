@@ -87,6 +87,52 @@ a.text-danger:hover {
 	visibility: hidden;
 }
 
+.sidebar-block {
+	position: relative;
+	background-color: #ffffff;
+	border: 1px solid #CCCCCC;
+	margin-top: 62px;
+	-webkit-box-shadow: 1px 1px 5px rgba(0,0,0,.4);
+}
+
+.sidebar-title {
+	font-weight: bold;
+	padding: 10px;
+	border-bottom: 1px solid #CCCCCC;
+}
+
+.sidebar-content {
+	padding: 10px;
+	height: 140px;
+}
+
+.sidebar-bottom {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background-color: #F1F1F1;
+	padding: 10px;
+	border-top: 1px solid #CCCCCC;
+}
+
+.sidebar-bottom .left {
+	width: 50%;
+	float: left;
+	padding-top: 7px;
+}
+
+.sidebar-bottom .right {
+	text-align: right;
+}
+
+/*
+*	Styles for Blog
+*/
+.blog-body {
+	margin: 5px 0px;
+}
+
 footer {
 	margin-top: 10px;
 	color: #999;
