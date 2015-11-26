@@ -6,6 +6,9 @@ jQuery(document).ready(function($) {
         $(this).find('.table-actions').css('visibility', 'hidden');
     });
 
+    // For sliding up the alert messages after 5 seconds
+    $('.alert-success').delay(3000).slideUp(500);
+
     // AJAX request for deleting a user
     $('.delete-user').on('click', function(event) {
         event.preventDefault();

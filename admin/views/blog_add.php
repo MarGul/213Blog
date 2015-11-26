@@ -49,7 +49,7 @@
                                 </div>
                             </div>
                             <div class="sidebar-bottom">
-                                <div class="left"><a href="#" class="text-danger">Move to Trash</a></div>
+                                <div class="left"></div>
                                 <div class="right">
                                     <input type="submit" value="Publish" class="btn btn-primary">
                                 </div>

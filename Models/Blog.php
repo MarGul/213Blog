@@ -145,4 +145,16 @@
                 'created'  => date('Y-m-d H:i:s')
             ));
         }
+
+        /**
+         * Function for updating the blog
+         */
+        private function _updateBlog() {
+            $this->update('blog', $this->_id, array(
+                'title'    => $this->_title,
+                'body'     => $this->_body,
+                'status'   => $this->_status,
+                'modified' => date('Y-m-d H:i:s')
+            ));
+        }
     }
