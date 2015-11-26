@@ -110,6 +110,31 @@
             }
         }
 
+        /**
+         * Static function for getting posts. If you pass in no parameter it will grab all the blog posts.
+         */
+        public function getPosts($args = array()) {
+            return $this->get('blog', array(1, '=', 1))->results();
+        }
+
+        private function _fetchBlog($intID) {
+            // check to see if its a integer otherwise throw an exception
+            if(!is_int($intID)) throw new \Exception('The blog ID needs to be of integer data type.');
+            // Grab the data
+            $objBlog = $this->get('blog', array('id', '=', $intID))->first_result();
+            // Set the instance variables
+            $this->_id          = $objBlog->id;
+            $this->_title       = $objBlog->title;
+            $this->_body        = $objBlog->body;
+            $this->_author      = $objBlog->author;
+            $this->_status      = $objBlog->status;
+            $this->_modified    = new \DateTime($objBlog->modified);
+            $this->_created     = new \DateTime($objBlog->created);
+        }
+
+        /**
+         * Private function for creating a blog post
+         */
         private function _createBlog() {
             $this->insert('blog', array(
                 'title'    => $this->_title,

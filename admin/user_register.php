@@ -11,7 +11,8 @@
 	// Create our return object
 	$objData = new \stdClass;
 	// Page title
-	$objData->pageTitle = 'Add New User';
+	$objData->pageTitle  = 'Add New User';
+	$objData->activeLink = 'users';
 	// Set up the default data for no warnings (this is when the user hasn't submitted the form).
 	$objData->error 	= false;
 	$objData->errors    = array();

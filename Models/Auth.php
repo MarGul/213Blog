@@ -52,4 +52,27 @@
                 header('Location: ' . $strLoginURL);
             }
         }
+
+        /**
+         * Function to see if the user is an administrator or not. If he is not then redirect to the dashboard.
+         *
+         * @return bool
+         */
+        public static function isAdmin() {
+            if($_SESSION['isAdmin']) {
+                return true;
+            } else {
+                $strDashboardURL = substr($_SERVER['REQUEST_URI'], 0, strrpos($_SERVER['REQUEST_URI'], '/') + 1) . 'dashboard.php';
+                header('Location: ' . $strDashboardURL);
+            }
+        }
+
+        /**
+         * Function to get the authenticated users ID
+         *
+         * @return string
+         */
+        public static function authID() {
+            return (!empty($_SESSION['user_id'])) ? $_SESSION['user_id'] : '';
+        }
     }
