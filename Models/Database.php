@@ -8,7 +8,8 @@ namespace Blog\Models;
                 $_query,
                 $_error = false,
                 $_results,
-                $_count = 0;
+                $_count = 0,
+                $_operators = array('=', '>', '<', '>=', '<=');
         
         // Create a database connection using PDO.
         public function __construct() {
@@ -56,13 +57,12 @@ namespace Blog\Models;
         
         public function action($action, $table, $where = array()) {
             if(count($where) == 3) {
-                $operators = array('=', '>', '<', '>=', '<=');
-                
+
                 $field     = $where[0];
                 $operator  = $where[1];
                 $value     = $where[2];
                 
-                if(in_array($operator, $operators)) {
+                if(in_array($operator, $this->_operators)) {
                     $sql = "{$action} FROM {$table} WHERE {$field} {$operator} ?";
                     if(!$this->query($sql, array($value))->error()) {
                         return $this;
@@ -71,6 +71,7 @@ namespace Blog\Models;
             }
             return false;
         }
+
         
         public function get($table, $where) {
             return $this->action("SELECT *", $table, $where);

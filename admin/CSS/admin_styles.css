@@ -133,6 +133,37 @@ a.text-danger:hover {
 	margin: 5px 0px;
 }
 
+#tagsList {
+	margin: 10px 0px;
+}
+
+#tagsList li {
+	display: inline-block;
+	float: left;
+	margin-right: 5px;
+	padding: 3px 5px;
+	background-color: #E0EAF1;
+	border-bottom: 1px solid #3E6D8E;
+	border-right: 1px solid #3E6D8E;
+	color: #3E6D8E;
+}
+
+#tagsList li > button {
+	margin: 0px;
+	padding: 0px;
+	background-color: transparent;
+	border: 0px;
+}
+
+#tagsList li > button > i {
+	margin: 0px 0px 0px 3px;
+	color: #d9534f;
+}
+
+#tagsList li > button:hover i {
+	color: #c9302c;
+}
+
 footer {
 	margin-top: 10px;
 	color: #999;

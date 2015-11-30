@@ -102,6 +102,10 @@
         public function getModified() { return (!empty($this->_modified)) ? $this->_modified : ''; }
         public function getCreated() { return (!empty($this->_created)) ? $this->_created : ''; }
 
+        /**
+         * When you hit save it will either create a new blog post or if you passed in a ID to the constructor it will
+         * update the blog post.
+         */
         public function save() {
             if(is_null($this->_id)) {
                 $this->_createBlog();
@@ -110,11 +114,43 @@
             }
         }
 
+        public function remove() {
+            if(!is_null($this->_id)) {
+                return $this->delete('blog', array('id', '=', $this->_id));
+            }
+        }
+
         /**
          * Static function for getting posts. If you pass in no parameter it will grab all the blog posts.
          */
         public function getPosts($args = array()) {
-            return $this->get('blog', array(1, '=', 1))->results();
+
+            $arrDefaults = array(
+                'status' => '',
+                'author' => '',
+                'tag'    => ''
+            );
+
+            $args = array_merge($arrDefaults, $args);
+
+            $arrValues = array();
+            $strSQL = "SELECT b.*, u.email, u.firstname, u.lastname, u.website
+                       FROM blog b, users u
+                       WHERE b.status = ? AND ";
+            if(empty($args['status'])) {
+                $arrValues[] = "published";
+            } else {
+                $arrValues[] = $args['status'];
+            }
+
+            if(!empty($args['author'])) {
+                $strSQL .= 'b.author = ? AND ';
+                $arrValues[] = (int)$args['author'];
+            }
+
+            $strSQL .= 'b.author = u.id';
+
+            return $this->query($strSQL, $arrValues)->results();
         }
 
         private function _fetchBlog($intID) {

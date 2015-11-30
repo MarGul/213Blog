@@ -16,15 +16,13 @@
 
     // Create the blog Model object
     $objBlog = new Blog();
-    if(Auth::isAdmin()) {
+    if(!Auth::isAdmin()) {
+        // If the user is an administrator then we should show them all the posts
         $objData->posts = $objBlog->getPosts();
     } else {
-        $objData->posts = $objBlog->getPosts(array('user' => Auth::authID()));
+        // If the user is not an administrator only show the users posts.
+        $objData->posts = $objBlog->getPosts(array('author' => Auth::authID()));
     }
-
-    echo '<pre>';
-    var_dump($objData->posts);
-    echo '</pre>';
 
     // Load the view
     include('views/blog.php');

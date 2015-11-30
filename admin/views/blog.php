@@ -7,7 +7,7 @@
 
         <h2>
             Blog Posts
-            <a href="blog_add.php" class="btn btn-info" style="margin-left: 10px;"><i class="fa fa-user-plus"></i> Add New Post</a>
+            <a href="blog_add.php" class="btn btn-info" style="margin-left: 10px;"><i class="fa fa-plus"></i> Add New Post</a>
         </h2>
 
 
@@ -27,11 +27,11 @@
                         <?php echo $post->title; ?>
                         <div class="table-actions">
                             <a href="blog_edit.php?blogID=<?php echo $post->id; ?>" class="text-blue">Edit</a> |
-                            <a href="#" class="text-danger delete-blog" data-id="<?php echo $post->id; ?>">Trash</a> |
+                            <a href="#" class="text-danger delete-blog" data-id="<?php echo $post->id; ?>">Delete</a> |
                             <a href="#" class="text-blue">View</a>
                         </div>
                     </td>
-                    <td><?php echo $post->author; ?></td>
+                    <td><?php echo $post->firstname . ' ' . $post->lastname; ?></td>
                     <td><?php echo $post->created; ?></td>
                 </tr>
             <?php } ?>
