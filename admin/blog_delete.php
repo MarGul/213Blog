@@ -21,6 +21,9 @@
     if(!$objBlog->error()) {
         if($boolAjax) {
             die(json_encode(array('success' => true)));
+        } else {
+            $strBlogURL = substr($_SERVER['REQUEST_URI'], 0, strrpos($_SERVER['REQUEST_URI'], '/') + 1) . 'blog.php';
+            header('Location: '. $strBlogURL);
         }
     }
 

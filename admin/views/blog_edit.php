@@ -47,7 +47,7 @@
                                 </div>
                             </div>
                             <div class="sidebar-bottom">
-                                <div class="left"><a href="#" class="text-danger">Move to Trash</a></div>
+                                <div class="left"><a href="blog_delete.php?blogID=<?php echo (int)$_GET['blogID']; ?>&ajax=0" class="text-danger">Delete</a></div>
                                 <div class="right">
                                     <input type="submit" value="Update" class="btn btn-primary">
                                 </div>
