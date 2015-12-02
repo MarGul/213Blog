@@ -1,0 +1,38 @@
+body {
+    background-color: #F1F1F1;
+}
+
+.page {
+    background-color: #fff;
+    margin: 15px 0px;
+    box-shadow: 5px 3px 15px rgba(0,0,0,0.5);
+}
+
+.content {
+    padding: 25px;
+}
+
+.sidebar {
+    padding: 25px 10px;
+}
+
+.carousel {
+    border-bottom: 3px solid #3c948b;
+}
+
+footer {
+    background-color: #222222;
+    border-top: 3px solid #3c948b;
+    padding: 50px;
+}
+
+@media screen and (min-width: 768px) {
+    main {
+        border-left: 1px solid #ccc;
+        border-right: 1px solid #ccc;
+    }
+
+    .content {
+        border-right: 1px dashed #eeeeee;
+    }
+}
