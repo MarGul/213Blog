@@ -4,8 +4,8 @@ namespace Blog\Models;
 
     class Database {
         private static $_instance = null;
-        private $_pdo,
-                $_query,
+        protected $_pdo;
+        private $_query,
                 $_error = false,
                 $_results,
                 $_count = 0,

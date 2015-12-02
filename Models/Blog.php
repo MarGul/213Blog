@@ -10,6 +10,7 @@
         private $_body;
         private $_status;
         private $_author;
+        private $_tags;
         private $_modified;
         private $_created;
 
@@ -93,6 +94,20 @@
         }
 
         /**
+         * Function for setting the tags
+         *
+         * @param $arrTags
+         * @return $this
+         */
+        public function setTags($arrTags) {
+            if(is_array($arrTags) && !empty($arrTags)) {
+                $this->_tags = $arrTags;
+            }
+
+            return $this;
+        }
+
+        /**
          * Getters
          */
         public function getTitle() { return (!empty($this->_title)) ? $this->_title : ''; }
@@ -163,6 +178,7 @@
             $this->_title       = $objBlog->title;
             $this->_body        = $objBlog->body;
             $this->_author      = $objBlog->author;
+            $this->_tags        = $this->_fetchTags();
             $this->_status      = $objBlog->status;
             $this->_modified    = new \DateTime($objBlog->modified);
             $this->_created     = new \DateTime($objBlog->created);
@@ -172,6 +188,7 @@
          * Private function for creating a blog post
          */
         private function _createBlog() {
+
             $this->insert('blog', array(
                 'title'    => $this->_title,
                 'body'     => $this->_body,
@@ -180,6 +197,13 @@
                 'modified' => '',
                 'created'  => date('Y-m-d H:i:s')
             ));
+
+            if(!$this->error()) {
+                $this->_id = $this->_pdo->lastInsertId();
+
+                // Insert the tags
+                $this->_createTags()->_setTags();
+            }
         }
 
         /**
@@ -192,5 +216,67 @@
                 'status'   => $this->_status,
                 'modified' => date('Y-m-d H:i:s')
             ));
+
+            if(!$this->error()) {
+                $this->_createTags()->updateTags();
+            }
+        }
+
+        /**
+         * Function for inserting the tag names that does not exist in the database already
+         *
+         * @return $this
+         */
+        private function _createTags() {
+            if(!empty($this->_tags)) {
+                // Loop through the tags and insert then if they do not exist
+                foreach ($this->_tags as $tag) {
+                    $this->query("INSERT IGNORE INTO tags (name) VALUES ('".$tag."')");
+                }
+            }
+
+            return $this;
+        }
+
+        /**
+         * Function for setting the
+         *
+         * @return $this
+         */
+        private function _setTags() {
+            if(!empty($this->_tags)) {
+                // Get the SQL formatted
+                $inSQL = '';
+                foreach ($this->_tags as $key => $tag) {
+                    $inSQL .= "'" . $tag . "'";
+                    if($key != count($this->_tags) - 1) {
+                        $inSQL .= ", ";
+                    }
+                }
+
+                // Grab the tags data and set it
+                $this->_tags = $this->query("SELECT * FROM tags WHERE name IN (" . $inSQL . ")")->results();
+
+                // Loop through the tags and set the relationships
+                foreach ($this->_tags as $tag) {
+                    $this->insert('blog_tags', array(
+                        'blog_id' => $this->_id,
+                        'tag_id'  => $tag->id
+                    ));
+                }
+
+
+            }
+            return $this;
+        }
+
+        private function _updateTags() {
+
+        }
+
+        private function _fetchTags() {
+            if(!is_null($this->_id)) {
+                $this->_tags = $this->get('tags', array('blog_id', '=', $this->_id))->results();
+            }
         }
     }

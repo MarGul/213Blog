@@ -50,6 +50,7 @@
             try {
                 $objBlog->setTitle(trim($objData->input['title']))
                         ->setBody(trim($objData->input['body']))
+                        ->setTags(json_decode($objData->input['tags']))
                         ->setAuthor((int)$_SESSION['user_id'])
                         ->setStatus(trim($objData->input['status']))
                         ->save();
