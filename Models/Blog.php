@@ -1,6 +1,8 @@
 <?php
     namespace Blog\Models;
+    use \Blog\Models;
     require_once('Database.php');
+    require_once('User.php');
 
 
     class Blog extends Database {
@@ -110,6 +112,7 @@
         /**
          * Getters
          */
+        public function getID() { return (!is_null($this->_id)) ? $this->_id : null; }
         public function getTitle() { return (!empty($this->_title)) ? $this->_title : ''; }
         public function getBody() { return (!empty($this->_body)) ? $this->_body : ''; }
         public function getStatus() { return (!empty($this->_status)) ? $this->_status : ''; }
@@ -156,9 +159,9 @@
             $args = array_merge($arrDefaults, $args);
 
             $arrValues = array();
-            $strSQL = "SELECT b.*, u.email, u.firstname, u.lastname, u.website
-                       FROM blog b, users u
-                       WHERE b.status = ? AND ";
+            $strSQL = "SELECT id
+                       FROM blog
+                       WHERE status = ?";
             if(empty($args['status'])) {
                 $arrValues[] = "published";
             } else {
@@ -166,13 +169,20 @@
             }
 
             if(!empty($args['author'])) {
-                $strSQL .= 'b.author = ? AND ';
+                $strSQL .= ' AND author = ?';
                 $arrValues[] = (int)$args['author'];
             }
 
-            $strSQL .= 'b.author = u.id';
+            $strSQL .= ' ORDER BY created DESC';
 
-            return $this->query($strSQL, $arrValues)->results();
+            $arrPosts = $this->query($strSQL, $arrValues)->results();
+            $arrReturn = array();
+            foreach ($arrPosts as $post) {
+                $arrReturn[] = new Blog((int)$post->id);
+            }
+
+            return $arrReturn;
+
         }
 
         private function _fetchBlog($intID) {
@@ -184,7 +194,7 @@
             $this->_id          = $objBlog->id;
             $this->_title       = $objBlog->title;
             $this->_body        = $objBlog->body;
-            $this->_author      = $objBlog->author;
+            $this->_author      = new User((int)$objBlog->author);
             $this->_tags        = $this->_fetchTags();
             $this->_status      = $objBlog->status;
             $this->_modified    = new \DateTime($objBlog->modified);

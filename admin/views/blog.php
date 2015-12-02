@@ -1,4 +1,5 @@
 <?php include('views/admin_header.php') ?>
+<?php //echo '<pre>'; var_dump($objData); die; ?>
 
 <script type="text/javascript" src="JS/scripts.js"></script>
 
@@ -26,16 +27,16 @@
                 foreach ($objData->posts as $post) { ?>
                     <tr>
                         <td>
-                            <?php echo $post->title; ?>
+                            <?php echo $post->getTitle(); ?>
                             <div class="table-actions">
-                                <a href="blog_edit.php?blogID=<?php echo $post->id; ?>" class="text-blue">Edit</a> |
+                                <a href="blog_edit.php?blogID=<?php echo $post->getID(); ?>" class="text-blue">Edit</a> |
                                 <a href="#" class="text-danger delete-blog"
-                                   data-id="<?php echo $post->id; ?>">Delete</a> |
+                                   data-id="<?php echo $post->getID(); ?>">Delete</a> |
                                 <a href="#" class="text-blue">View</a>
                             </div>
                         </td>
-                        <td><?php echo $post->firstname . ' ' . $post->lastname; ?></td>
-                        <td><?php echo $post->created; ?></td>
+                        <td><?php echo $post->getAuthor()->getFirstname() . ' ' . $post->getAuthor()->getLastname(); ?></td>
+                        <td><?php echo $post->getCreated()->format('m/d/Y'); ?></td>
                     </tr>
                     <?php
                 }
