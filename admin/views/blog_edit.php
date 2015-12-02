@@ -27,10 +27,25 @@
 
                         <button type="button" class="btn btn-info"><i class="fa fa-picture-o"></i> Add Media</button>
 
-                        <div class="form-group <?php echo (in_array('body', $objData->errors)) ? 'has-error' : ''; ?>">
-                                <textarea id="body" name="body" rows="17" class="form-control blog-body"><?php echo $objData->input['body']; ?></textarea>
-                        </div>
+                        <div class="form-group <?php echo (in_array('body', $objData->errors)) ? 'has-error' : ''; ?>"><textarea id="body" name="body" rows="17" class="form-control blog-body"><?php echo $objData->input['body']; ?></textarea></div>
 
+                        <label for="tags">Tags</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control">
+                            <span class="input-group-btn">
+                                <button class="btn btn-success add-tag" type="button"><i class="fa fa-plus"></i> Add</button>
+                            </span>
+                        </div>
+                        <input type="hidden" name="tags" id="tags" value='<?php echo $objData->input['tags']; ?>'>
+                        <ul class="list-unstyled" id="tagsList">
+                            <?php
+                            if(!empty($objData->input['tags'])) {
+                                foreach (json_decode($objData->input['tags']) as $tag) {
+                                    echo '<li><span>' . $tag . '</span><button type="button" class="delete-tag"><i class="fa fa-minus-circle"></i></button></li>';
+                                }
+                            }
+                            ?>
+                        </ul>
 
                     </div>
 

@@ -114,6 +114,13 @@
         public function getBody() { return (!empty($this->_body)) ? $this->_body : ''; }
         public function getStatus() { return (!empty($this->_status)) ? $this->_status : ''; }
         public function getAuthor() { return (!empty($this->_author)) ? $this->_author : ''; }
+        public function getTagsJSON() {
+            $arrReturn = array();
+            foreach ($this->_tags as $tag) {
+                $arrReturn[] = $tag->name;
+            }
+            return json_encode($arrReturn);
+        }
         public function getModified() { return (!empty($this->_modified)) ? $this->_modified : ''; }
         public function getCreated() { return (!empty($this->_created)) ? $this->_created : ''; }
 
@@ -218,7 +225,7 @@
             ));
 
             if(!$this->error()) {
-                $this->_createTags()->updateTags();
+                $this->_createTags()->_setTags(true);
             }
         }
 
@@ -243,8 +250,17 @@
          *
          * @return $this
          */
-        private function _setTags() {
+        private function _setTags($boolUpdate = false) {
             if(!empty($this->_tags)) {
+                if($boolUpdate) {
+                    // Clear the old tags first if we're updating.
+                    $arrTags = $this->_fetchTags();
+                    foreach ($arrTags as $tag) {
+                        $this->query("DELETE FROM blog_tags WHERE blog_id = " . $this->_id . " AND tag_id = " . $tag->id);
+                    }
+
+                }
+
                 // Get the SQL formatted
                 $inSQL = '';
                 foreach ($this->_tags as $key => $tag) {
@@ -270,13 +286,19 @@
             return $this;
         }
 
-        private function _updateTags() {
-
-        }
-
+        /**
+         * Function for grabbing the tags set to a blog post
+         *
+         * @return mixed
+         */
         private function _fetchTags() {
             if(!is_null($this->_id)) {
-                $this->_tags = $this->get('tags', array('blog_id', '=', $this->_id))->results();
+                return  $this->query("
+                              SELECT t.id as id, name
+                              FROM blog_tags bt, tags t
+                              WHERE bt.blog_id = ". $this->_id ." AND
+                                    bt.tag_id = t.id"
+                        )->results();
             }
         }
     }

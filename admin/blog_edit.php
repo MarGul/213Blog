@@ -19,9 +19,10 @@
     $objData->error      = false;
     $objData->errors     = array();
     $objData->input      = array(
-        'title'  => $objBlog->getTitle(),
-        'body'   => $objBlog->getBody(),
-        'status' => $objBlog->getStatus()
+        'title'   => $objBlog->getTitle(),
+        'body'    => $objBlog->getBody(),
+        'status'  => $objBlog->getStatus(),
+        'tags'    => $objBlog->getTagsJSON(),
     );
     $objData->msg        = array();
     $objData->success    = null;
@@ -57,6 +58,7 @@
                 $objBlog->setTitle(trim($objData->input['title']))
                         ->setBody(trim($objData->input['body']))
                         ->setAuthor((int)$_SESSION['user_id'])
+                        ->setTags(json_decode($objData->input['tags']))
                         ->setStatus(trim($objData->input['status']))
                         ->save();
             } catch (\Exception $e) {
