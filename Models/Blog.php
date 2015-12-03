@@ -117,6 +117,7 @@
         public function getBody() { return (!empty($this->_body)) ? $this->_body : ''; }
         public function getStatus() { return (!empty($this->_status)) ? $this->_status : ''; }
         public function getAuthor() { return (!empty($this->_author)) ? $this->_author : ''; }
+        public function getTags() { return (!empty($this->_tags)) ? $this->_tags : ''; }
         public function getTagsJSON() {
             $arrReturn = array();
             foreach ($this->_tags as $tag) {

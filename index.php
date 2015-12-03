@@ -7,8 +7,5 @@
     $objBlog = new Blog();
     $arrPosts = $objBlog->getPosts();
 
-    echo '<pre>';
-    var_dump($arrPosts);
-
     // Load the view
     include('views/index.php');

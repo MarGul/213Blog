@@ -11,6 +11,8 @@
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <!-- Pull in our styles-->
     <link rel="stylesheet" type="text/css" href="CSS/styles.css">
+    <!-- Pull in OpenSans-->
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
 
     <!-- Pull in jQuery and Bootstrap JS -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
