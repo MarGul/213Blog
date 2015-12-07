@@ -80,6 +80,7 @@ require_once('Database.php');
             return $this;
         }
 
+        public function getID() { return (!empty($this->_id)) ? $this->_id : ''; }
         public function getEmail() { return (!empty($this->_email)) ? $this->_email : ''; }
         public function getFirstName() { return (!empty($this->_fname)) ? $this->_fname : ''; }
         public function getLastName() { return (!empty($this->_lname)) ? $this->_lname : ''; }

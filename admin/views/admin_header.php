@@ -41,6 +41,9 @@
 					<li <?php echo ($objData->activeLink == 'users') ? 'class="active"' : ''; ?>>
 						<a href="users.php"><i class="fa fa-users"></i> Users</a>
 					</li>
+					<li <?php echo ($objData->activeLink == 'subscribers') ? 'class="active"' : ''; ?>>
+						<a href="subscribers.php"><i class="fa fa-star"></i> Subscribers</a>
+					</li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="logout.php"><i class="fa fa-sign-out"></i> Log Out</a></li>

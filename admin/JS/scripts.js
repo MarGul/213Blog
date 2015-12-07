@@ -102,4 +102,26 @@ jQuery(document).ready(function($) {
         $(this).closest('li').remove();
         tagsInput.val(JSON.stringify(arrTags));
     });
+
+    // For deleting a subscriber
+    $('.delete-subscriber').on('click', function(event) {
+       event.preventDefault();
+
+        var id   = $(this).data('id');
+        var tableRow = $(this).closest('tr');
+
+        $.ajax({
+            url: 'subscriber_delete.php',
+            method: 'POST',
+            dataType: 'JSON',
+            data: {
+                id: id
+            },
+            success: function(data) {
+                if(data.success) {
+                    tableRow.remove();
+                }
+            }
+        });
+    });
 });
