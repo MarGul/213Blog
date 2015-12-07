@@ -15,7 +15,19 @@
             </div>
             <div class="col-xs-12 col-sm-3">
                 <aside class="sidebar">
-                    Sidebar
+                    <div class="sidebar-wrap">
+                        <div class="sidebar-head">Authors</div>
+                        <div class="sidebar-content">
+                            <?php foreach ($arrUserData as $user) { ?>
+                                <ul class="list-group">
+                                    <li class="list-group-item">
+                                        <span class="badge"><?php echo $user['count']; ?></span>
+                                        <a href="blog_author.php?id=<?php echo $user['id']; ?>"><?php echo $user['name']; ?></a>
+                                    </li>
+                                </ul>
+                            <?php } ?>
+                        </div>
+                    </div>
                 </aside>
             </div>
         </div>

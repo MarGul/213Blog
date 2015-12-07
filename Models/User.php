@@ -117,9 +117,18 @@ require_once('Database.php');
             $this->_created     = new \DateTime($objUser->created);
         }
 
+        /**
+         * Function to fetch all users
+         *
+         * @return mixed
+         */
         public function fetchUsers() {
             // Need to work on the database wrapper. If you don't pass in a where clause array it should grab all records.
             return $this->get('users', array(1, '=', 1))->results();
+        }
+
+        public function getBlogCount($userID) {
+            return $this->get('blog', array('author', '=', (int)$userID))->count();
         }
 
         private function _createUser() {
