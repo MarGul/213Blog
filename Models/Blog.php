@@ -13,6 +13,7 @@
         private $_status;
         private $_author;
         private $_tags;
+        private $_comments;
         private $_modified;
         private $_created;
 
@@ -125,6 +126,7 @@
             }
             return json_encode($arrReturn);
         }
+        public function getComments() { return (!empty($this->_comments)) ? $this->_comments : array(); }
         public function getModified() { return (!empty($this->_modified)) ? $this->_modified : ''; }
         public function getCreated() { return (!empty($this->_created)) ? $this->_created : ''; }
 
@@ -197,6 +199,7 @@
             $this->_body        = $objBlog->body;
             $this->_author      = new User((int)$objBlog->author);
             $this->_tags        = $this->_fetchTags();
+            $this->_comments    = $this->_fetchComments();
             $this->_status      = $objBlog->status;
             $this->_modified    = new \DateTime($objBlog->modified);
             $this->_created     = new \DateTime($objBlog->created);
@@ -311,5 +314,24 @@
                                     bt.tag_id = t.id"
                         )->results();
             }
+        }
+
+        /**
+         * Function for getting the comments for a blog post
+         *
+         * @return mixed
+         */
+        private function _fetchComments() {
+            return $this->get('comments', array('blogID', '=', $this->_id))->results();
+        }
+
+        public function insertComment($strName, $strEmail, $strComment) {
+            return $this->insert('comments', array(
+                'blogID'  => $this->_id,
+                'name'    => $strName,
+                'email'   => $strEmail,
+                'comment' => $strComment,
+                'date'    => date('Y-m-d')
+            ));
         }
     }

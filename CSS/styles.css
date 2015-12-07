@@ -104,6 +104,52 @@ a:hover {
     border-radius: 0px;
 }
 
+/*Single Post Styles*/
+.details-wrap {
+    padding: 5px;
+    border: 1px dashed #eeeeee;
+}
+
+.list-inline {
+    margin: 0px;
+}
+
+.details-content {
+    margin: 15px 0px;
+}
+
+.details-content img {
+    float: left;
+    padding: 0px 15px 10px 0px;
+}
+
+.insert-comment {
+    padding: 10px;
+    margin: 20px 0px;
+    background-color: #eeeeee;
+    border: 1px solid #ccc;
+}
+
+.insert-comment h3 {
+    margin: 0px 0px 10px 0px;
+}
+
+.comment-wrap {
+    margin: 20px 0px;
+}
+
+.comment-head {
+    background-color: #eeeeee;
+    border: 1px solid #ccc;
+    padding: 5px;
+}
+
+.comment-body {
+    padding: 5px;
+    border-bottom: 2px solid #3c948b;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #eee;
+}
 
 footer {
     background-color: #222222;

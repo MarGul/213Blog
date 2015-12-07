@@ -1,7 +1,7 @@
 <article class="post-multi clearfix">
     <figure class="post-multi-image col-xs-12 col-md-4 col-lg-3 hidden-xs hidden-sm" style="background-image: url('http://placehold.it/230x255');"></figure>
     <section class="post-multi-content col-xs-12 col-md-8 col-lg-9">
-        <h1><a href="#"><?php echo $post->getTitle(); ?></a></h1>
+        <h1><a href="blog_details.php?id=<?php echo $post->getID(); ?>"><?php echo $post->getTitle(); ?></a></h1>
 
         <ul class="list-inline">
             <li><i class="fa fa-clock-o"></i> <?php echo $post->getCreated()->format('F jS, Y'); ?></li>
@@ -17,7 +17,7 @@
                 }
             ?>
         </p>
-        <a href="#" class="btn btn-link pull-right">Read More <i class="fa fa-arrow-circle-right"></i></a>
+        <a href="blog_details.php?id=<?php echo $post->getID(); ?>" class="btn btn-link pull-right">Read More <i class="fa fa-arrow-circle-right"></i></a>
     </section>
     <div class="post-multi-footer col-xs-12">
         <ul class="list-inline">

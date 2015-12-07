@@ -124,4 +124,31 @@ jQuery(document).ready(function($) {
             }
         });
     });
+
+    // For deleting a comment
+    $('.delete-comment').on('click', function(event) {
+        event.preventDefault();
+
+        var conf = confirm('Are you sure you want to delete this comment?');
+        if(conf) {
+
+            var id = $(this).data('id');
+            var tableRow = $(this).closest('.comment-wrap');
+
+            console.log(tableRow);
+            $.ajax({
+                url: 'comment_delete.php',
+                method: 'POST',
+                dataType: 'JSON',
+                data: {
+                    id: id
+                },
+                success: function(data) {
+                    if(data.success) {
+                        tableRow.remove();
+                    }
+                }
+            });
+        }
+    });
 });

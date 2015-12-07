@@ -47,6 +47,21 @@
                             ?>
                         </ul>
 
+                        <br>
+                        <hr>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <label for="comments">Comments</label>
+                                <?php
+                                    if(!empty($objBlog->getComments())) {
+                                        foreach ($objBlog->getComments() as $comment) {
+                                            include('partials/comment.php');
+                                        }
+                                    }
+                                ?>
+                            </div>
+                        </div>
+
                     </div>
 
                     <div class="col-xs-12 col-md-3">

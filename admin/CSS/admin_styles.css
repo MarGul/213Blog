@@ -164,6 +164,23 @@ a.text-danger:hover {
 	color: #c9302c;
 }
 
+.comment-wrap {
+	margin: 20px 0px;
+}
+
+.comment-head {
+	background-color: #eeeeee;
+	border: 1px solid #ccc;
+	padding: 5px;
+}
+
+.comment-body {
+	padding: 5px;
+	border-bottom: 2px solid #3c948b;
+	border-left: 1px solid #ccc;
+	border-right: 1px solid #eee;
+}
+
 footer {
 	margin-top: 10px;
 	color: #999;
