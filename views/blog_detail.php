@@ -10,6 +10,12 @@
                         <ul class="list-inline">
                             <li><i class="fa fa-clock-o"></i> <?php echo $objBlog->getCreated()->format('F jS, Y'); ?></li>
                             <li><i class="fa fa-user"></i> <?php echo $objBlog->getAuthor()->getFirstname() . ' ' . $objBlog->getAuthor()->getLastname(); ?></li>
+                            <li>
+                                <i class="fa fa-tags"></i>
+                                <?php foreach ($objBlog->getTags() as $tag) { ?>
+                                    <a href="blog_tag?id=<?php echo $tag->id; ?>">#<?php echo $tag->name; ?></a>
+                                <?php } ?>
+                            </li>
                         </ul>
                     </div>
 

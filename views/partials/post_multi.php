@@ -21,7 +21,7 @@
     </section>
     <div class="post-multi-footer col-xs-12">
         <ul class="list-inline">
-            <li><i class="fa fa-comment"></i> 2 Comments</li>
+            <li><i class="fa fa-comment"></i> <?php echo count($post->getComments()); ?> Comments</li>
             <li>
                 <i class="fa fa-tags"></i>
                 <?php

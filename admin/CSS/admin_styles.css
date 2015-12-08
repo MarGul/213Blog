@@ -126,6 +126,59 @@ a.text-danger:hover {
 	text-align: right;
 }
 
+/*Styles For Dashboard*/
+.dash-wrap {
+	margin-bottom: 15px;
+	border-bottom: 3px solid transparent;
+}
+
+.dash-head {
+	padding: 6px 12px;
+	text-align: center;
+	border: 1px solid transparent;
+	font-weight: bold;
+	color: #fff;
+}
+
+.dash-wrap.posts .dash-head {
+	background-color: #78C0A8;
+}
+
+.dash-wrap.comments .dash-head {
+	background-color: #F07818;
+}
+
+.dash-wrap.subscribers .dash-head {
+	background-color: #6E9ECF;
+}
+
+.dash-content {
+	padding: 10px;
+}
+
+.dash-content ul li {
+	border-bottom: 1px solid #eee;
+	padding: 3px 0px;
+}
+
+.dash-content ul li:last-child {
+	border-bottom: 0px solid transparent;
+}
+
+.dash-wrap.posts {
+	border-color: #78C0A8;
+}
+
+.dash-wrap.comments {
+	border-color: #F07818;
+}
+
+.dash-wrap.subscribers {
+	border-color: #6E9ECF;
+}
+
+
+
 /*
 *	Styles for Blog
 */
