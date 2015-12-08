@@ -38,6 +38,9 @@
 					<li <?php echo ($objData->activeLink == 'blog') ? 'class="active"' : ''; ?>>
 						<a href="blog.php"><i class="fa fa-newspaper-o"></i> Blog</a>
 					</li>
+					<li <?php echo ($objData->activeLink == 'media') ? 'class="active"' : ''; ?>>
+						<a href="media.php"><i class="fa fa-picture-o"></i> Media</a>
+					</li>
 					<li <?php echo ($objData->activeLink == 'users') ? 'class="active"' : ''; ?>>
 						<a href="users.php"><i class="fa fa-users"></i> Users</a>
 					</li>

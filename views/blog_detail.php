@@ -13,7 +13,7 @@
                             <li>
                                 <i class="fa fa-tags"></i>
                                 <?php foreach ($objBlog->getTags() as $tag) { ?>
-                                    <a href="blog_tag?id=<?php echo $tag->id; ?>">#<?php echo $tag->name; ?></a>
+                                    <a href="blog_tag.php?id=<?php echo $tag->id; ?>">#<?php echo $tag->name; ?></a>
                                 <?php } ?>
                             </li>
                         </ul>

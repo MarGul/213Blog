@@ -178,10 +178,17 @@
 
             $strSQL .= ' ORDER BY created DESC';
 
-            $arrPosts = $this->query($strSQL, $arrValues)->results();
             $arrReturn = array();
-            foreach ($arrPosts as $post) {
-                $arrReturn[] = new Blog((int)$post->id);
+            if(empty($args['tag'])) {
+                $arrPosts = $this->query($strSQL, $arrValues)->results();
+                foreach ($arrPosts as $post) {
+                    $arrReturn[] = new Blog((int)$post->id);
+                }
+            } else {
+                $arrPosts = $this->get('blog_tags', array('tag_id', '=', (int)$args['tag']))->results();
+                foreach ($arrPosts as $post) {
+                    $arrReturn[] = new Blog((int)$post->blog_id);
+                }
             }
 
             return $arrReturn;

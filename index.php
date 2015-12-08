@@ -22,5 +22,8 @@
         );
     }
 
+    // Get tags for the tagcloud
+    $arrTags = $objBlog->get('tags', array(1, '=', 1))->results();
+
     // Load the view
     include('views/index.php');

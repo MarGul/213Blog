@@ -177,8 +177,6 @@ a.text-danger:hover {
 	border-color: #6E9ECF;
 }
 
-
-
 /*
 *	Styles for Blog
 */
@@ -233,6 +231,15 @@ a.text-danger:hover {
 	border-left: 1px solid #ccc;
 	border-right: 1px solid #eee;
 }
+
+/*Styles For Media*/
+.media-upload {
+	background-color: #eee;
+	border: 1px solid #ccc;
+	padding: 10px;
+	margin: 10px 0px;
+}
+
 
 footer {
 	margin-top: 10px;

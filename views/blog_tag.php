@@ -5,6 +5,8 @@
             <div class="col-xs-12 col-sm-9">
                 <section class="content">
 
+                    <h2>Showing Posts with Tag: <?php echo $strTagName; ?></h2>
+
                     <?php
                     foreach ($arrPosts as $post) {
                         include('partials/post_multi.php');
@@ -28,15 +30,16 @@
                             <?php } ?>
                         </div>
                     </div>
+
                     <div class="sidebar-wrap">
                         <div class="sidebar-head">Tag Cloud</div>
                         <div class="sidebar-content">
                             <ul class="list-inline">
-                                <?php foreach ($arrTags as $tag) { ?>
-                                    <li>
-                                        <a href="blog_tag.php?id=<?php echo $tag->id; ?>" style="font-size: <?php echo rand(14, 22); ?>px;"><?php echo $tag->name; ?></a>
-                                    </li>
-                                <?php } ?>
+                            <?php foreach ($arrTags as $tag) { ?>
+                                <li>
+                                    <a href="blog_tag.php?id=<?php echo $tag->id; ?>" style="font-size: <?php echo rand(14, 22); ?>px;"><?php echo $tag->name; ?></a>
+                                </li>
+                            <?php } ?>
                             </ul>
                         </div>
                     </div>

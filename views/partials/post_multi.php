@@ -26,7 +26,7 @@
                 <i class="fa fa-tags"></i>
                 <?php
                 foreach ($post->getTags() as $tag) {
-                    echo '<a href="#">#' . $tag->name . '</a> ';
+                    echo '<a href="blog_tag.php?id='.$tag->id.'">#' . $tag->name . '</a> ';
                 }
                 ?>
             </li>
