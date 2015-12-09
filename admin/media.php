@@ -14,12 +14,15 @@ $objData = new \stdClass;
 $objData->pageTitle  = 'Media';
 $objData->activeLink = 'media';
 
+$objUpload = new Uploads();
 $uploadSuccess = null;
 // Handle uploading of media
 if(!empty($_FILES) && $_SERVER['REQUEST_METHOD'] == 'POST') {
-    $objUpload = new Uploads();
     $uploadSuccess = $objUpload->uploadMedia($_FILES['upload']);
 }
+
+// Grab all the uploads
+$objData->arrUploads = $objUpload->getUploads();
 
 // Load the view
 include('views/media.php');

@@ -135,7 +135,6 @@ jQuery(document).ready(function($) {
             var id = $(this).data('id');
             var tableRow = $(this).closest('.comment-wrap');
 
-            console.log(tableRow);
             $.ajax({
                 url: 'comment_delete.php',
                 method: 'POST',
@@ -150,5 +149,58 @@ jQuery(document).ready(function($) {
                 }
             });
         }
+    });
+
+    // For deleting a upload
+    $('.upload-delete').on('click', function(event) {
+        event.preventDefault();
+
+        var conf = confirm('Are you sure you want to delete this file?');
+        if(conf) {
+
+            var id = $(this).data('id');
+            var tableRow = $(this).closest('.upload-wrapper');
+
+            $.ajax({
+                url: 'media_delete.php',
+                method: 'POST',
+                dataType: 'JSON',
+                data: {
+                    id: id
+                },
+                success: function(data) {
+                    if(data.success) {
+                        tableRow.remove();
+                    }
+                }
+            });
+        }
+    });
+
+    // Show info for a upload
+    $('.upload-info').on('click', function() {
+        alert('URL for this upload: ' + $(this).data('url'));
+    });
+
+    // For selecting the image in the uploads
+    $('.img-select').on('click', function() {
+        // Clear the latest clicked one
+        $('.img-select.active').removeClass('active');
+        // Put the active class on the clicked one
+        $(this).addClass('active');
+    });
+
+    $('.btn-img-select').on('click', function() {
+        // Grab the active image
+        var active = $('.img-select.active');
+        var img    = active.data('img');
+        // Insert it into the hidden field
+        var insertField = $('#img-insert-field');
+        insertField.val(img);
+        // Insert the image
+        var insertDiv   = $('#img-insert-div');
+        insertDiv.html('<img src="' + img + '" class="img-responsive">');
+        // Close the modal
+        $('#chooseMedia').modal('hide');
     });
 });

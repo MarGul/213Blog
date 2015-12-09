@@ -25,7 +25,7 @@
                             <input type="text" id="title" name="title" class="form-control" placeholder="Enter Title Here" value="<?php echo ($objData->error) ? $objData->input['title'] : ''; ?>">
                         </div>
 
-                        <button type="button" class="btn btn-info"><i class="fa fa-picture-o"></i> Add Media</button>
+                        <a href="media.php" class="btn btn-info" target="_blank"><i class="fa fa-picture-o"></i> Add Media</a>
 
                         <div class="form-group <?php echo (in_array('body', $objData->errors)) ? 'has-error' : ''; ?>">
                             <textarea id="body" name="body" rows="17" class="form-control blog-body"><?php echo ($objData->error) ? $objData->input['body'] : ''; ?></textarea>
@@ -58,8 +58,8 @@
                                 <div class="form-group">
                                     <label for="status"><i class="fa fa-eye"></i> Status</label>
                                     <select name="status" id="status" class="form-control">
-                                        <option value="published" <?php echo ($objData->error && $objData->input['status'] == 'published') ? 'selected="selected"' : ''; ?>'>Published</option>
-                                        <option value="draft" <?php echo ($objData->error && $objData->input['status'] == 'draft') ? 'selected="selected"' : ''; ?>>Draft</option>
+                                        <option value="published" <?php echo ($objData->error && $objData->input['status'] == 'published') ? 'selected' : ''; ?>'>Published</option>
+                                        <option value="draft" <?php echo ($objData->error && $objData->input['status'] == 'draft') ? 'selected' : ''; ?>>Draft</option>
                                     </select>
                                 </div>
                             </div>
@@ -70,10 +70,26 @@
                                 </div>
                             </div>
                         </aside>
+
+                        <aside class="sidebar-block clearfix">
+                            <input type="hidden" name="featuredImg" id="img-insert-field" value="<?php echo ($objData->error) ? $objData->input['featuredImg'] : '' ?>">
+                            <div class="sidebar-title">Featured Image</div>
+                            <div class="sidebar-content featured-img" id="img-insert-div">
+                                <?php if($objData->error && !empty($objData->input['featuredImg'])) { ?>
+                                    <img src="<?php echo $objData->input['featuredImg']; ?>" class="img-responsive">
+                                <?php } ?>
+                            </div>
+
+                            <button type="button" class="btn btn-primary pull-right" style="margin: 3px;" data-toggle="modal"
+                                    data-target="#chooseMedia">Choose Media</button>
+
+                        </aside>
                     </div>
                 </form>
             </main>
         </div>
     </div>
+
+    <?php include('views/partials/choose_media.php'); ?>
 
 <?php include('views/admin_footer.php') ?>

@@ -12,6 +12,7 @@
         private $_body;
         private $_status;
         private $_author;
+        private $_img;
         private $_tags;
         private $_comments;
         private $_modified;
@@ -60,6 +61,15 @@
                 $this->_body = $strBody;
             } else {
                 throw new \Exception('A blog entry needs content');
+            }
+            return $this;
+        }
+
+        public function setImg($strImg) {
+            if(is_string($strImg)) {
+                $this->_img = $strImg;
+            } else {
+                throw new \Exception('The image url needs to be a string');
             }
             return $this;
         }
@@ -116,6 +126,7 @@
         public function getID() { return (!is_null($this->_id)) ? $this->_id : null; }
         public function getTitle() { return (!empty($this->_title)) ? $this->_title : ''; }
         public function getBody() { return (!empty($this->_body)) ? $this->_body : ''; }
+        public function getImg() { return (!empty($this->_img)) ? $this->_img : ''; }
         public function getStatus() { return (!empty($this->_status)) ? $this->_status : ''; }
         public function getAuthor() { return (!empty($this->_author)) ? $this->_author : ''; }
         public function getTags() { return (!empty($this->_tags)) ? $this->_tags : ''; }
@@ -205,6 +216,7 @@
             $this->_title       = $objBlog->title;
             $this->_body        = $objBlog->body;
             $this->_author      = new User((int)$objBlog->author);
+            $this->_img         = $objBlog->image;
             $this->_tags        = $this->_fetchTags();
             $this->_comments    = $this->_fetchComments();
             $this->_status      = $objBlog->status;
@@ -222,6 +234,7 @@
                 'body'     => $this->_body,
                 'status'   => $this->_status,
                 'author'   => $this->_author,
+                'image'    => $this->_img,
                 'modified' => '',
                 'created'  => date('Y-m-d H:i:s')
             ));
@@ -241,6 +254,7 @@
             $this->update('blog', $this->_id, array(
                 'title'    => $this->_title,
                 'body'     => $this->_body,
+                'image'    => $this->_img,
                 'status'   => $this->_status,
                 'modified' => date('Y-m-d H:i:s')
             ));

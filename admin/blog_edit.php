@@ -2,8 +2,10 @@
     namespace Blog\Admin\Controllers;
     use Blog\Models\Auth;
     use Blog\Models\Blog;
+    use Blog\Models\Uploads;
     require_once('../Models/Auth.php');
     require_once('../Models/Blog.php');
+    require_once('../Models/Uploads.php');
 
     // This will perform a check to see if the user is authenticated. If not it will redirect to the login page.
     Auth::isAuth();
@@ -21,11 +23,16 @@
     $objData->input      = array(
         'title'   => $objBlog->getTitle(),
         'body'    => $objBlog->getBody(),
+        'image'   => $objBlog->getImg(),
         'status'  => $objBlog->getStatus(),
         'tags'    => $objBlog->getTagsJSON(),
     );
     $objData->msg        = array();
     $objData->success    = null;
+
+    // Get the uploads
+    $objUploads = new Uploads();
+    $objData->arrUploads = $objUploads->getUploads();
 
     // User posted the form
     if(!empty($_POST) && $_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -58,6 +65,7 @@
                 $objBlog->setTitle(trim($objData->input['title']))
                         ->setBody(trim($objData->input['body']))
                         ->setAuthor((int)$_SESSION['user_id'])
+                        ->setImg(trim($objData->input['image']))
                         ->setTags(json_decode($objData->input['tags']))
                         ->setStatus(trim($objData->input['status']))
                         ->save();

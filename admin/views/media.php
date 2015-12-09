@@ -24,6 +24,23 @@
                 </form>
             </div>
 
+            <hr>
+
+            <div class="row">
+                <?php foreach($objData->arrUploads as $upload) { ?>
+                <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+                    <div class="upload-wrapper" style="background-image: url('<?php echo $upload->url; ?>');">
+                        <div class="upload-actions">
+                            <div class="row">
+                                <div class="col-xs-6"><a href="#" class="text-link upload-info" data-url="<?php echo $upload->url; ?>">Info</a></div>
+                                <div class="col-xs-6"><a href="#" class="text-danger upload-delete" data-id="<?php echo $upload->id; ?>">Delete</a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <?php } ?>
+            </div>
+
 
         </main>
     </div>

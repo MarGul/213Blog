@@ -27,10 +27,13 @@
                 <!-- Wrapper for slides -->
                 <div class="carousel-inner" role="listbox">
                     <div class="item active">
-                        <img src="http://placehold.it/1140x300" alt="...">
+                        <img src="//localhost/dev/213Blog/uploads/slide1.jpg" alt="...">
                     </div>
                     <div class="item">
-                        <img src="http://placehold.it/1140x300" alt="...">
+                        <img src="//localhost/dev/213Blog/uploads/slide2.jpg" alt="...">
+                    </div>
+                    <div class="item">
+                        <img src="//localhost/dev/213Blog/uploads/slide3.jpg" alt="...">
                     </div>
                 </div>
 

@@ -83,10 +83,26 @@
                                 </div>
                             </div>
                         </aside>
+
+                        <aside class="sidebar-block clearfix">
+                            <input type="hidden" name="image" id="img-insert-field" value="<?php echo $objData->input['title']; ?>">
+                            <div class="sidebar-title">Featured Image</div>
+                            <div class="sidebar-content featured-img" id="img-insert-div">
+                                <?php if(!empty($objData->input['image'])) { ?>
+                                    <img src="<?php echo $objData->input['image']; ?>" class="img-responsive">
+                                <?php } ?>
+                            </div>
+
+                            <button type="button" class="btn btn-primary pull-right" style="margin: 3px;" data-toggle="modal"
+                                    data-target="#chooseMedia">Choose Media</button>
+
+                        </aside>
                     </div>
                 </form>
             </main>
         </div>
     </div>
+
+    <?php include('views/partials/choose_media.php'); ?>
 
 <?php include('views/admin_footer.php') ?>
