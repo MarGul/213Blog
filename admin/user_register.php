@@ -2,8 +2,10 @@
 	namespace Blog\Admin\Controllers;
 	use Blog\Models\User;
 	use Blog\Models\Auth;
+	use Blog\Models\Uploads;
 	require_once('../Models/User.php');
 	require_once('../Models/Auth.php');
+	require_once('../Models/Uploads.php');
 
 	// This will perform a check to see if the user is authenticated. If not it will redirect to the login page.
 	Auth::isAuth();
@@ -21,9 +23,15 @@
 		'usrFirstName' 	=> '',
 		'usrLastName' 	=> '',
 		'usrWebsite'	=> '',
+		'usrBio'        => '',
+		'usrImage'      => ''
 	);
 	$objData->msg    	= array();
 	$objData->success   = null;
+
+	// Get the uploads
+	$objUploads = new Uploads();
+	$objData->arrUploads = $objUploads->getUploads();
 
 	// Check to see if the form has been submitted
 	if(!empty($_POST) && $_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -36,6 +44,8 @@
 			'usrWebsite' 		=> filter_input(INPUT_POST, 'usrWebsite'),
 			'usrPassword' 		=> filter_input(INPUT_POST, 'usrPassword'),
 			'usrPasswordRepeat' => filter_input(INPUT_POST, 'usrPasswordRepeat'),
+			'usrBio'            => filter_input(INPUT_POST, 'usrBio'),
+			'usrImage'          => filter_input(INPUT_POST, 'usrImage'),
 			'usrRole' 			=> filter_input(INPUT_POST, 'usrRole')
 		);
 
@@ -44,7 +54,7 @@
 		// Loop through the data and see so that all the required fields have input.
 		foreach ($objData->input as $key => $input) {
 			// Non required fields
-			if(in_array($key, array('usrWebsite', 'usrRole'))) continue;
+			if(in_array($key, array('usrWebsite', 'usrRole', 'usrBio', 'usrImage'))) continue;
 
 			if(empty($input)) {
 				$objData->error    = true;
@@ -81,6 +91,8 @@
 						->setLastName($objData->input['usrLastName'])
 						->setWebsite($objData->input['usrWebsite'])
 						->setPassword($objData->input['usrPassword'])
+						->setBio($objData->input['usrBio'])
+						->setImage($objData->input['usrImage'])
 						->setAdmin((bool)$objData->input['usrRole'])
 						->save();
 			} catch(\Exception $e) {

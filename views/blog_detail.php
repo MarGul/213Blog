@@ -11,16 +11,19 @@
                             <li><i class="fa fa-clock-o"></i> <?php echo $objBlog->getCreated()->format('F jS, Y'); ?></li>
                             <li><i class="fa fa-user"></i> <?php echo $objBlog->getAuthor()->getFirstname() . ' ' . $objBlog->getAuthor()->getLastname(); ?></li>
                             <li>
-                                <i class="fa fa-tags"></i>
-                                <?php foreach ($objBlog->getTags() as $tag) { ?>
-                                    <a href="blog_tag.php?id=<?php echo $tag->id; ?>">#<?php echo $tag->name; ?></a>
-                                <?php } ?>
+                                <?php
+                                if(!empty($objBlog->getTags())) {
+                                    echo '<i class="fa fa-tags"></i>';
+                                    foreach ($objBlog->getTags() as $tag) {
+                                        echo '<a href="blog_tag.php?id=<?php echo $tag->id; ?>">#<?php echo $tag->name; ?></a>';
+                                    }
+                                }   ?>
                             </li>
                         </ul>
                     </div>
 
                     <div class="details-content clearfix">
-                        <img src="http://placehold.it/230x255" alt="<?php echo $objBlog->getTitle(); ?>">
+                        <img src="<?php echo (!empty($objBlog->getImg())) ? $objBlog->getImg() : '//placehold.it/230x255'; ?>" alt="<?php echo $objBlog->getTitle(); ?>">
                         <?php echo nl2br($objBlog->getBody()); ?>
                     </div>
 

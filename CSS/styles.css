@@ -155,6 +155,8 @@ footer {
     background-color: #222222;
     border-top: 3px solid #3c948b;
     padding: 50px;
+    text-align: center;
+    color: #eee;
 }
 
 @media screen and (min-width: 768px) {

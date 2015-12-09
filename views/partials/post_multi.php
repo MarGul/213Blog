@@ -1,5 +1,6 @@
 <article class="post-multi clearfix">
-    <figure class="post-multi-image col-xs-12 col-md-4 col-lg-3 hidden-xs hidden-sm" style="background-image: url('http://placehold.it/230x255');"></figure>
+    <figure class="post-multi-image col-xs-12 col-md-4 col-lg-3 hidden-xs hidden-sm"
+            style="background-image: url('<?php echo (!empty($post->getImg())) ? $post->getImg() : '//placehold.it/230x255'; ?>');"></figure>
     <section class="post-multi-content col-xs-12 col-md-8 col-lg-9">
         <h1><a href="blog_details.php?id=<?php echo $post->getID(); ?>"><?php echo $post->getTitle(); ?></a></h1>
 
@@ -23,10 +24,12 @@
         <ul class="list-inline">
             <li><i class="fa fa-comment"></i> <?php echo count($post->getComments()); ?> Comments</li>
             <li>
-                <i class="fa fa-tags"></i>
                 <?php
-                foreach ($post->getTags() as $tag) {
-                    echo '<a href="blog_tag.php?id='.$tag->id.'">#' . $tag->name . '</a> ';
+                if(!empty($post->getTags())) {
+                    echo '<i class="fa fa-tags"></i>';
+                    foreach ($post->getTags() as $tag) {
+                        echo '<a href="blog_tag.php?id=' . $tag->id . '">#' . $tag->name . '</a> ';
+                    }
                 }
                 ?>
             </li>

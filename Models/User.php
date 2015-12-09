@@ -9,9 +9,17 @@ require_once('Database.php');
         private $_fname;
         private $_lname;
         private $_website;
+        private $_bio;
+        private $_image;
         private $_admin;
         private $_created;
 
+        /**
+         * Constructor
+         *
+         * @param null $usrID
+         * @throws \Exception
+         */
         public function __construct($usrID = null) {
             parent::__construct();
 
@@ -22,6 +30,11 @@ require_once('Database.php');
             }
         }
 
+        /**
+         * @param $strEmail
+         * @return $this
+         * @throws \Exception
+         */
         public function setEmail($strEmail) {
             if(filter_var($strEmail, FILTER_VALIDATE_EMAIL)) {
                 $this->_email = $strEmail;
@@ -31,6 +44,11 @@ require_once('Database.php');
             return $this;
         }
 
+        /**
+         * @param $strFname
+         * @return $this
+         * @throws \Exception
+         */
         public function setFirstName($strFname) {
             if(is_string($strFname)) {
                 $this->_fname = $strFname;
@@ -40,6 +58,11 @@ require_once('Database.php');
             return $this;
         }
 
+        /**
+         * @param $strLname
+         * @return $this
+         * @throws \Exception
+         */
         public function setLastName($strLname) {
             if(is_string($strLname)) {
                 $this->_lname = $strLname;
@@ -50,6 +73,11 @@ require_once('Database.php');
             return $this;
         }
 
+        /**
+         * @param $strWeb
+         * @return $this
+         * @throws \Exception
+         */
         public function setWebsite($strWeb) {
             if(is_string($strWeb)) {
                 $this->_website = $strWeb;
@@ -60,6 +88,11 @@ require_once('Database.php');
             return $this;
         }
 
+        /**
+         * @param $strPassword
+         * @return $this
+         * @throws \Exception
+         */
         public function setPassword($strPassword) {
             if(is_string($strPassword)) {
                 $this->_password = $strPassword;
@@ -70,6 +103,36 @@ require_once('Database.php');
             return $this;
         }
 
+        /**
+         * @param $strBio
+         * @return $this
+         * @throws \Exception
+         */
+        public function setBio($strBio) {
+            if(is_string($strBio)) {
+                $this->_bio = $strBio;
+            } else {
+                throw new \Exception('The bio property needs to be of string data type.');
+            }
+
+            return $this;
+        }
+
+        public function setImage($strImage) {
+            if(is_string($strImage)) {
+                $this->_image = $strImage;
+            } else {
+                throw new \Exception('The image property needs to be of string data type.');
+            }
+
+            return $this;
+        }
+
+        /**
+         * @param $bolAdmin
+         * @return $this
+         * @throws \Exception
+         */
         public function setAdmin($bolAdmin) {
             if(is_bool($bolAdmin)) {
                 $this->_admin = $bolAdmin;
@@ -80,11 +143,14 @@ require_once('Database.php');
             return $this;
         }
 
+        // Getters
         public function getID() { return (!empty($this->_id)) ? $this->_id : ''; }
         public function getEmail() { return (!empty($this->_email)) ? $this->_email : ''; }
         public function getFirstName() { return (!empty($this->_fname)) ? $this->_fname : ''; }
         public function getLastName() { return (!empty($this->_lname)) ? $this->_lname : ''; }
         public function getWebsite() { return (!empty($this->_website)) ? $this->_website : ''; }
+        public function getBio() { return (!empty($this->_bio)) ? $this->_bio : ''; }
+        public function getImage() { return (!empty($this->_image)) ? $this->_image : ''; }
         public function isAdmin() { return $this->_admin; }
 
         public function save() {
@@ -103,6 +169,10 @@ require_once('Database.php');
             return false;
         }
 
+        /**
+         * @param $intID
+         * @throws \Exception
+         */
         private function _fetchUser($intID) {
             // check to see if its a integer otherwise throw an exception
             if(!is_int($intID)) throw new \Exception('The user ID needs to be of integer data type.');
@@ -114,6 +184,8 @@ require_once('Database.php');
             $this->_fname       = $objUser->firstname;
             $this->_lname       = $objUser->lastname;
             $this->_website     = $objUser->website;
+            $this->_bio         = $objUser->bio;
+            $this->_image       = $objUser->image;
             $this->_admin       = (bool)$objUser->admin;
             $this->_created     = new \DateTime($objUser->created);
         }
@@ -128,6 +200,10 @@ require_once('Database.php');
             return $this->get('users', array(1, '=', 1))->results();
         }
 
+        /**
+         * @param $userID
+         * @return int
+         */
         public function getBlogCount($userID) {
             return $this->get('blog', array('author', '=', (int)$userID))->count();
         }
@@ -139,6 +215,8 @@ require_once('Database.php');
                 'firstname' => $this->_fname,
                 'lastname'  => $this->_lname,
                 'website'   => $this->_website,
+                'bio'       => $this->_bio,
+                'image'     => $this->_image,
                 'created'   => date('Y-m-d H:i:s')
             ));
         }
@@ -149,6 +227,8 @@ require_once('Database.php');
                 'firstname' => $this->_fname,
                 'lastname'  => $this->_lname,
                 'website'   => $this->_website,
+                'bio'       => $this->_bio,
+                'image'     => $this->_image,
                 'admin'     => $this->_admin
             );
             if(!empty($this->_password)) {

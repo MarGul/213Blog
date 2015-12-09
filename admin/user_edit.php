@@ -2,8 +2,10 @@
     namespace Blog\Admin\Controllers;
     use Blog\Models\User;
     use Blog\Models\Auth;
+    use Blog\Models\Uploads;
     require_once('../Models/User.php');
     require_once('../Models/Auth.php');
+    require_once('../Models/Uploads.php');
 
     // This will perform a check to see if the user is authenticated. If not it will redirect to the login page.
     Auth::isAuth();
@@ -30,9 +32,15 @@
             'firstname' => $objUser->getFirstName(),
             'lastname'  => $objUser->getLastName(),
             'website'   => $objUser->getWebsite(),
+            'bio'       => $objUser->getBio(),
+            'image'     => $objUser->getImage(),
             'admin'     => $objUser->isAdmin()
         );
     }
+
+    // Get the uploads
+    $objUploads = new Uploads();
+    $objData->arrUploads = $objUploads->getUploads();
 
     // Form submitted
     if(!empty($_POST) && $_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -41,6 +49,8 @@
         $objData->input['firstname']      = filter_input(INPUT_POST, 'usrFirstName');
         $objData->input['lastname']       = filter_input(INPUT_POST, 'usrLastName');
         $objData->input['website']        = filter_input(INPUT_POST, 'usrWebsite');
+        $objData->input['bio']            = filter_input(INPUT_POST, 'usrBio');
+        $objData->input['image']          = filter_input(INPUT_POST, 'usrImage');
         $objData->input['password']       = filter_input(INPUT_POST, 'usrPassword');
         $objData->input['passwordRepeat'] = filter_input(INPUT_POST, 'usrPasswordRepeat');
         $objData->input['admin']          = (bool)filter_input(INPUT_POST, 'usrRole');
@@ -50,7 +60,7 @@
         // Loop through the data and see so that all the required fields have input.
         foreach ($objData->input as $key => $input) {
             // Non required fields
-            if(in_array($key, array('website', 'admin', 'password', 'passwordRepeat'))) continue;
+            if(in_array($key, array('website', 'admin', 'password', 'passwordRepeat', 'bio', 'image'))) continue;
 
             if(empty($input)) {
                 $objData->error    = true;
@@ -88,6 +98,8 @@
                         ->setLastName($objData->input['lastname'])
                         ->setWebsite($objData->input['website'])
                         ->setPassword($objData->input['password'])
+                        ->setBio($objData->input['bio'])
+                        ->setImage($objData->input['image'])
                         ->setAdmin((bool)$objData->input['admin'])
                         ->save();
             } catch(\Exception $e) {

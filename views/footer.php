@@ -1,5 +1,5 @@
                 <footer>
-                    Here will footer content go
+                    &copy; <?php echo date('Y'); ?> Marcus Gullberg
                 </footer>
             </div>
         </div>

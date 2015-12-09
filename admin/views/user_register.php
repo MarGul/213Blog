@@ -1,5 +1,7 @@
 <?php include('views/admin_header.php') ?>
 
+	<script type="text/javascript" src="JS/scripts.js"></script>
+
 	<div class="container">
 		<main class="page">
 
@@ -41,6 +43,22 @@
 					<input type="password" name="usrPasswordRepeat" id="usrPasswordRepeat" class="form-control">
 				</div>
 
+				<div class="form-group">
+					<label for="usrBio">Bio</label>
+					<textarea name="usrBio" id="usrBio" class="form-control" rows="3"><?php echo ($objData->error) ? $objData->input['usrBio'] : ''; ?></textarea>
+				</div>
+
+				<div class="form-group">
+					<label for="usrImage">Image</label>
+					<input type="hidden" name="usrImage" id="img-insert-field" value="<?php echo ($objData->error) ? $objData->input['usrImage'] : ''; ?>">
+					<div id="img-insert-div">
+						<?php if($objData->error && !empty($objData->input['usrImage'])) { ?>
+							<img src="<?php echo $objData->input['usrImage']; ?>" class="img-responsive">
+						<?php } ?>
+					</div>
+					<button type="button" class="btn btn-primary" style="margin: 5px 0px;" data-toggle="modal" data-target="#chooseMedia">Choose Media</button>
+				</div>
+
 				<div class="form-group <?php echo (in_array('usrRole', $objData->errors)) ? 'has-error' : ''; ?>">
 					<label for="usrRole">User Role:</label>
 					<select name="usrRole" id="usrRole" class="form-control">
@@ -55,5 +73,6 @@
 
 		</main>
 	</div>
+	<?php include('views/partials/choose_media.php'); ?>
 
 <?php include('views/admin_footer.php') ?>
