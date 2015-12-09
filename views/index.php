@@ -18,14 +18,14 @@
                     <div class="sidebar-wrap">
                         <div class="sidebar-head">Authors</div>
                         <div class="sidebar-content">
+                            <ul class="list-group">
                             <?php foreach ($arrUserData as $user) { ?>
-                                <ul class="list-group">
-                                    <li class="list-group-item">
-                                        <span class="badge"><?php echo $user['count']; ?></span>
-                                        <a href="blog_author.php?id=<?php echo $user['id']; ?>"><?php echo $user['name']; ?></a>
-                                    </li>
-                                </ul>
+                                <li class="list-group-item">
+                                    <span class="badge"><?php echo $user['count']; ?></span>
+                                    <a href="blog_author.php?id=<?php echo $user['id']; ?>"><?php echo $user['name']; ?></a>
+                                </li>
                             <?php } ?>
+                            </ul>
                         </div>
                     </div>
                     <div class="sidebar-wrap">

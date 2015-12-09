@@ -37,6 +37,22 @@ a:hover {
     width: 100%;
 }
 
+.img-circle {
+    border-radius: 50%;
+}
+
+.user-img-wrap {
+    width: 70%;
+    margin: 0 auto;
+}
+
+.user-bio-wrap {
+    padding: 10px;
+    color: #aaa;
+    font-style: italic;
+    text-align: center;
+}
+
 .page {
     background-color: #fff;
     margin: 15px 0px;

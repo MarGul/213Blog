@@ -18,8 +18,14 @@
                     <div class="sidebar-wrap">
                         <div class="sidebar-head"><?php echo $objUser->getFirstName() . ' ' . $objUser->getLastName(); ?></div>
                         <div class="sidebar-content">
-                            <br>
-
+                            <?php if(!empty($objUser->getImage())) { ?>
+                                <div class="user-img-wrap">
+                                    <img src="<?php echo $objUser->getImage(); ?>" class="img-circle img-responsive">
+                                </div>
+                            <?php } ?>
+                            <div class="user-bio-wrap">
+                                <?php echo $objUser->getBio(); ?>
+                            </div>
                         </div>
                     </div>
                     <div class="sidebar-wrap">
